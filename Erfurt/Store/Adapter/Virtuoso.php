@@ -784,11 +784,10 @@ class Erfurt_Store_Adapter_Virtuoso implements Erfurt_Store_Adapter_Interface, E
         foreach ($rdfPhpStatements as $currentSubject => $predicates) {
             foreach ($predicates as $currentPredicate => $objects) {
                 foreach ($objects as $currentObject) {
-                    // TODO: blank nodes
                     $resource = '<' . trim($currentSubject) . '>';
                     $property = '<' . trim($currentPredicate) . '>';
 
-                    if ($currentObject['type'] == 'uri') {
+                    if ($currentObject['type'] == 'uri' || $currentObject['type'] == 'bnode') {
                         $value = '<' . $currentObject['value'] . '>';
                     } else {
                         $value = $this->buildLiteralString(
